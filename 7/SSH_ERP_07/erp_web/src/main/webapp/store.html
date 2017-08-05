@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>订单明细管理</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript">
+        var name = 'store';
+        var columns = [[
+            {field:'uuid',title:'编号',width:100},
+            {field:'name',title:'名称',width:100},
+            {field:'empuuid',title:'员工编号',width:100},
+            {
+                field: '-',
+                title: '操作',
+                width: 120,
+                halign: 'center',
+                align: 'center',
+                formatter: function (value, row, index) {
+                	 var oper = '<a href="javascript:void(0);" class="easyui-linkbutton" onclick="edit(' + row.uuid + ')"> <img src="images/edit.png"></a>';
+                     oper += ' &nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton" onclick="del(' + row.uuid + ')"><img src="images/delete.png"></a>';
+                     return oper;
+                }
+            }
+
+        ]];
+
+        function clearSelect() {
+            $("#depSelect").combobox("clear")
+        }
+    </script>
+</head>
+<body>
+<table id="grid"></table>
+<div id="tb" style="padding:5px;height:auto">
+    <form id="searchForm">
+        编号：<input class="easyui-textbox" name="t1.uuid">
+        名称：<input class="easyui-textbox" name="t1.name">
+        员工编号：<input class="easyui-textbox" name="t1.empuuid">
+        <a href="javascript:void(0)" onclick="clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel">清空</a>
+        <a href="javascript:void(0)" onclick="refresh()" class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+
+    </form>
+</div>
+<div id="editWindow">
+    <form id="editForm" method="post">
+        <input name="t1.uuid" type="hidden">
+        <table cellpadding="5" align="center">
+            <tr>
+                <td>名称</td>
+                <td><input class="easyui-textbox" name="t1.name"> </td>
+            </tr>
+            <tr>
+                <td>员工编号</td>
+                <td><input class="easyui-textbox" name="t1.empuuid"> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

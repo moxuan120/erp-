@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.qgg.erp.entity.Supplier" table="SUPPLIER" >
+        <id name="uuid" column="UUID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <param name="sequence_name">SUPPLIER_SEQ</param>
+            </generator>
+        </id>
+        <property name="name" column="NAME"/>
+        <property name="address" column="ADDRESS"/>
+        <property name="contact" column="CONTACT"/>
+        <property name="tele" column="TELE"/>
+        <property name="email" column="EMAIL"/>
+        <property name="type" column="TYPE"/>
+    </class>
+</hibernate-mapping>

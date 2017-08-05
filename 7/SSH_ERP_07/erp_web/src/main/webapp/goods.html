@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>商品管理</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript" src="js/download.js"></script>
+    <script type="text/javascript">
+        var name = 'goods';
+        var selectName = 'goodsType';
+        var columns = [[
+            {field: 'uuid', title: '编号', width: 60, align: 'center', halign: 'center'},
+            {field: 'name', title: '名称', width: 120, halign: 'center'},
+            {field: 'origin', title: '产地', width: 120, halign: 'center'},
+            {field: 'producer', title: '厂家', width: 120, halign: 'center'},
+            {field: 'unit', title: '单位', width: 120, halign: 'center'},
+            {field: 'inprice', title: '进货价', width: 120, halign: 'center'},
+            {field: 'outprice', title: '销售价', width: 120, halign: 'center'},
+            {field: 'goodsType', title: '商品类型', width: 120, halign: 'center',formatter:function (value) {
+                if(value != null) return value.name;
+                else return"";
+            }},
+
+            {
+                field: '-',
+                title: '操作',
+                width: 120,
+                halign: 'center',
+                align: 'center',
+                formatter: function (value, row, index) {
+                	 var oper = '<a href="javascript:void(0);" class="easyui-linkbutton" onclick="edit(' + row.uuid + ')"> <img src="images/edit.png"></a>';
+                     oper += ' &nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton" onclick="del(' + row.uuid + ')"><img src="images/delete.png"></a>';
+                     return oper;
+                }
+            }
+
+        ]];
+        function clearSelect() {
+            $("#depSelect").combobox("clear")
+        }
+    </script>
+</head>
+<body>
+<table id="grid"></table>
+<div id="tb" style="padding:5px;height:auto">
+    <form id="searchForm">
+        名称：<input class="easyui-textbox" name="t1.name" style="width:80px">
+        产地：<input class="easyui-textbox" name="t1.origin" style="width:150px">
+        厂家：<input class="easyui-textbox" name="t1.producer" style="width:150px">
+        单位：<input class="easyui-textbox" name="t1.unit" style="width:80px"><br>
+        进货价：<input class="easyui-textbox" name="t1.inprice" style="width:80px">--<input class="easyui-textbox" name="t2.inprice" style="width:80px">
+        销售价：<input class="easyui-textbox" name="t1.outprice" style="width:80px">--<input class="easyui-textbox" name="t2.outprice" style="width:80px">
+        商品类型：<select  id="select1" class="easyui-combobox" name="t1.goodsType.uuid" style="width: 80px" onLoadSuccess="addOption()"
+                    data-options="editable:true,valueField:'uuid',textField:'name',multiple:false,panelHeight:'auto',panelMaxHeight:'400'">
+                </select>
+        <a href="javascript:void(0)" onclick="clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel">清空</a>
+        <a href="javascript:void(0)" onclick="refresh()" class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+
+
+    </form>
+</div>
+<div id="editWindow">
+    <form id="editForm" method="post">
+        <input type="hidden" name="t1.uuid">
+        <table cellpadding="5" align="center">
+            <tr>
+                <td>名称</td>
+                <td><input class="easyui-textbox" name="t1.name" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td>产地</td>
+                <td><input class="easyui-textbox" name="t1.origin" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td>厂家</td>
+                <td><input class="easyui-textbox" name="t1.producer" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td>单位</td>
+                <td><input class="easyui-textbox" name="t1.unit" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td>进货价</td>
+                <td><input class="easyui-numberbox" name="t1.inprice" data-options="required:true,min:0,prefix:'￥'"/></td>
+            </tr>
+            <tr>
+                <td>销售价</td>
+                <td><input class="easyui-numberbox" name="t1.outprice" data-options="required:true,min:0,prefix:'￥'"/></td>
+            </tr>
+            <tr>
+                <td>商品类型</td>
+                <td><input id="select2" class="easyui-combobox" name="t1.goodsType.uuid" data-options="required:true,editable:false,valueField:'uuid',textField:'name',panelHeight:'auto'"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!-- 导入窗口 -->
+<div id="importDlg" class="easyui-dialog" style="padding:4px;">
+	<form id="importForm" enctype="multipart/form-data">
+		选择文件:<input name="file" type="file" />
+	</form>
+</div>
+</body>
+</html>

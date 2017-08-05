@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script src="js/download.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript">
+        var name = 'emp';
+        var selectName = 'dep';
+        var columns = [[
+            {field: 'uuid', title: '编号', width: 60, align: 'center', halign: 'center'},
+            {field: 'username', title: '登陆名', width: 100, halign: 'center'},
+            {field: 'name', title: '真实姓名', width: 120, halign: 'center'},
+            {
+                field: 'gender', title: '性别', width: 80, halign: 'center', formatter: function (value) {
+                if (value == 1) return '男';
+                if (value == 0) return '女';
+            }
+            },
+            {field: 'email', title: '邮箱', width: 120, halign: 'center'},
+            {field: 'tele', title: '电话', width: 120, halign: 'center'},
+            {field: 'birthday', title: '生日', width: 120, halign: 'center'},
+            {field: 'address', title: '地址', width: 120, halign: 'center'},
+            {
+                field: 'dep', title: '部门', width: 120, halign: 'center', formatter: function (value) {
+                    if (value != null) return value.name;
+                    else return "";
+                }
+            },
+
+            {
+                field: '-',
+                title: '操作',
+                width: 120,
+                halign: 'center',
+                align: 'center',
+                formatter: function (value, row, index) {
+                	 var oper = '<a href="javascript:void(0);" class="easyui-linkbutton" onclick="edit(' + row.uuid + ')"> <img src="images/edit.png"></a>';
+                     oper += ' &nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton" onclick="del(' + row.uuid + ')"><img src="images/delete.png"></a>';
+                     return oper;
+                }
+            }
+
+        ]];
+    </script>
+</head>
+<body>
+<table id="grid"></table>
+<div id="tb" style="padding:5px;height:auto">
+    <form id="searchForm">
+        登录名：<input class="easyui-textbox" name="t1.username" style="width:80px">
+        姓名：<input class="easyui-textbox" name="t1.name" style="width:80px">
+        性别：<select class="easyui-combobox" name="t1.gender" style="width:80px">
+            <option value="">未定义</option>
+            <option value="0">女</option>
+            <option value="1">男</option>
+        </select>
+        邮箱：<input class="easyui-textbox" name="t1.email" style="width:80px">
+        电话：<input class="easyui-textbox" name="t1.tele" style="width:120px"><br>
+        生日：<input class="easyui-datebox" name="t1.birthday" style="width:142px" data-options="editable:false,showSeconds:false">--
+             <input class="easyui-datebox" name="t2.birthday" style="width:142px" data-options="editable:false,showSeconds:false">
+        地址：<input class="easyui-textbox" name="t1.address" style="width:150px">
+        部门：<select  id="select1" class="easyui-combobox" name="t1.dep.uuid" style="width: 120px"
+                    data-options="editable:true,valueField:'uuid',textField:'name',multiple:false">
+    </select>
+        <a href="javascript:void(0)" onclick="clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel">清空</a>
+        <a href="javascript:void(0)" onclick="refresh()" class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+
+
+    </form>
+</div>
+<div id="editWindow">
+    <form id="editForm" method="post">
+        <input type="hidden" name="t1.uuid">
+        <table cellpadding="5" align="center">
+            <tr>
+                <td>登陆名</td>
+                <td><input class="easyui-textbox" name="t1.username" data-options="required:true"/></td>
+            </tr>
+            <tr>
+                <td>真实姓名</td>
+                <td><input class="easyui-textbox" name="t1.name"/></td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td><input type="radio" name="t1.gender" value="0"/>女
+                    <input type="radio" name="t1.gender" value="1"/>男
+                </td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td><input class="easyui-textbox" name="t1.email" data-options="required:true,validType:'email'"/></td>
+            </tr>
+            <tr>
+                <td>电话</td>
+                <td><input class="easyui-textbox" name="t1.tele"/></td>
+            </tr>
+            <tr>
+                <td>生日</td>
+                <td><input class="easyui-datebox" name="t1.birthday" data-options="editable:false,showSeconds:false"/></td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td><input class="easyui-textbox" name="t1.address"/></td>
+            </tr>
+            <tr>
+                <td>部门</td>
+                <td><input id="select2" class="easyui-combobox" name="t1.dep.uuid"
+                           data-options="required:true,editable:false,valueField:'uuid',textField:'name'"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!-- 导入窗口 -->
+<div id="importDlg" class="easyui-dialog" style="padding:4px;">
+	<form id="importForm" enctype="multipart/form-data">
+		选择文件:<input name="file" type="file" />
+	</form>
+</div>
+
+</body>
+</html>

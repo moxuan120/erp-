@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+">
+    <!--任务类-->
+    <bean id="mailJob" class="cn.qgg.erp.job.MailJob">
+        <property name="mailUtil" ref="mailUtil"/>
+        <property name="storeAlertBiz" ref="storeAlertBiz"/>
+        <property name="to" value="xu.tongjun@163.com"/>
+        <property name="freeMarker" ref="freeMarker"/>
+        <property name="dailyReport" ref="dailyReport"/>
+    </bean>
+    <!--库存预警任务类描述-->
+    <bean id="jonDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="mailJob"/>
+        <property name="targetMethod" value="sendStoreAlertMail"/>
+        <!--并发执行-->
+        <property name="concurrent" value="false"/>
+    </bean>
+    <!--库存预警触发器-->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jonDetail"/>
+        <!--每日八点发送-->
+        <property name="cronExpression" value="0 0 8 * * ? *"/>
+        <!--<property name="cronExpression" value="0/10 * * * * ? *"/>-->
+    </bean>
+    
+     <!--每日报表任务类描述-->
+    <bean id="dailyReportJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="mailJob"/>
+        <property name="targetMethod" value="sendDailyReport"/>
+        <!--并发执行-->
+        <property name="concurrent" value="false"/>
+    </bean>
+    <!--每日报表触发器-->
+    <bean id="dailyReportCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="dailyReportJobDetail"/>
+        <!-- 每日8点1分发送前一天的每日报表 -->
+        <property name="cronExpression" value="0 1 8 * * ? *"/>
+         <!--<property name="cronExpression" value="0/10 * * * * ? *"/>-->
+    </bean>
+    
+    <!--任务调度容器-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+                <ref bean="dailyReportCronTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.qgg.erp.entity.Emp" table="EMP" >
+        <id name="uuid" column="UUID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <param name="sequence_name">EMP_SEQ</param>
+            </generator>
+        </id>
+        <property name="username" column="USERNAME"/>
+        <property name="pwd" column="PWD" update="false"/>
+        <property name="name" column="NAME"/>
+        <property name="gender" column="GENDER"/>
+        <property name="email" column="EMAIL"/>
+        <property name="tele" column="TELE"/>
+        <property name="address" column="ADDRESS"/>
+        <property name="birthday" column="BIRTHDAY"/>
+        <!--<property name="depuuid" column="DEPUUID"/>-->
+        <many-to-one name="dep" class="cn.qgg.erp.entity.Dep" column="DEPUUID" lazy="false"/>
+        <bag name="roleList" table="EMP_ROLE" order-by="ROLEUUID">
+            <key column="EMPUUID"/>
+            <many-to-many class="cn.qgg.erp.entity.Role" column="ROLEUUID"/>
+        </bag>
+    </class>
+</hibernate-mapping>

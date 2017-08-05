@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd  ">
+
+    <bean id="depDao" class="cn.qgg.erp.dao.impl.DepDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="empDao" class="cn.qgg.erp.dao.impl.EmpDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="goodsDao" class="cn.qgg.erp.dao.impl.GoodsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="goodsTypeDao" class="cn.qgg.erp.dao.impl.GoodsTypeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="menuDao" class="cn.qgg.erp.dao.impl.MenuDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="ordersDao" class="cn.qgg.erp.dao.impl.OrdersDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="orderDetailDao" class="cn.qgg.erp.dao.impl.OrderDetailDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="supplierDao" class="cn.qgg.erp.dao.impl.SupplierDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="inventoryDao" class="cn.qgg.erp.dao.impl.InventoryDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="returnorderdetailDao" class="cn.qgg.erp.dao.impl.ReturnorderdetailDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="returnordersDao" class="cn.qgg.erp.dao.impl.ReturnordersDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="roleDao" class="cn.qgg.erp.dao.impl.RoleDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="storedetailDao" class="cn.qgg.erp.dao.impl.StoredetailDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="storeoperDao" class="cn.qgg.erp.dao.impl.StoreoperDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="storeDao" class="cn.qgg.erp.dao.impl.StoreDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="reportDao" class="cn.qgg.erp.dao.impl.ReportDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="storeAlertDao" class="cn.qgg.erp.dao.impl.StoreAlertDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+</beans>

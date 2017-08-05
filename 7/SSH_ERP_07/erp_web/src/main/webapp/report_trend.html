@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>销售趋势分析</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <link rel="stylesheet" href="css/table.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="ui/highcharts.js"></script>
+    <script type="text/javascript" src="ui/highcharts-3d.js"></script>
+    <script type="text/javascript" src="ui/request.js"></script>
+    <script type="text/javascript" src="js/report.js"></script>
+    <script type="text/javascript">
+        if (from == "orders") {
+            if (type == 1) {
+                chartTitle = '年度采购趋势分析图';
+            }
+            if (type == 2) {
+                chartTitle = '年度销售趋势分析图';
+            }
+            var chartUrl = 'report_trendReport?type=' + type;
+            var columns = [[
+                {field: 'name', title: '月份', width: 100},
+                {field: 'y', title: '金额', width: 100}
+            ]]
+        }
+        if (from == "return") {
+            if (type == 1) {
+                chartTitle = '年度采购退货趋势分析图';
+            }
+            if (type == 2) {
+                chartTitle = '年度销售退货趋势分析图';
+            }
+            var chartUrl = 'report_sellTrendReport?type=' + type;
+            var columns = [[
+                {field: 'name', title: '月份', width: 200},
+                {field: 'y', title: '金额', width: 200}
+            ]]
+        }
+        if (from == "store") {
+            if (type == 1) {
+                chartTitle = '年入库趋势分析图';
+            }
+            if (type == 2) {
+                chartTitle = '年出库趋势分析图';
+            }
+            var chartUrl = 'report_getInOutStore?type=' + type;
+            var columns = [[
+                {field: 'name', title: '月份', width: 100},
+                {field: 'y', title: '金额', width: 100}
+            ]]
+        }
+    </script>
+</head>
+
+
+<body class="easyui-layout">
+<div data-options="region:'center',title:'趋势表'" style="padding:4px;background-color:#eee;width: 20%">
+    <div id="tb" style="padding:5px;height:auto">
+        <form id="searchForm">
+            年份：<select class="easyui-combobox" id="year" name="year" style="width:150px">
+            <option>2010</option>
+            <option>2011</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option selected>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+        </select>
+
+            <a href="javascript:$('#searchForm').form('clear');" class="easyui-linkbutton"
+               iconCls="icon-cancel">清空</a>
+            <a href="javascript: $('#grid').datagrid('load', $('#searchForm').serializeJSON());"
+               class="easyui-linkbutton"
+               iconCls="icon-search">筛选</a>
+        </form>
+    </div>
+    <table id="grid"></table>
+</div>
+<div data-options="region:'east',title:'趋势图',split:true" style="width:700px;">
+    <div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+    <div id="line"></div>
+</div>
+</body>
+</html>

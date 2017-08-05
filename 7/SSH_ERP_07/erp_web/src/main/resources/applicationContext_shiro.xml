@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 这个id的值要跟web.xml中配置的shiro代理中的过滤器名称要一致 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--shiro核心-->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 过滤器容器 -->
+        <property name="filters">
+            <map>
+                <entry key="perms" value-ref="erpFilter"/>
+            </map>
+        </property>
+        <!--登陆url-->
+        <property name="loginUrl" value="/login.html"/>
+        <!--未授权url-->
+        <property name="unauthorizedUrl" value="/error.html"/>
+        <!--过滤链-->
+        <property name="filterChainDefinitions">
+            <value>
+                /error.html = anon
+                /login.html = anon
+                /user_login = anon
+                /*_simpleList = authc
+
+                /dep.html=perms["部门"]
+                /emp.html=perms["员工"]
+                /goods.html=perms["商品"]
+                /goodstype.html=perms["商品类型"]
+                /inventory.html.html=perms["盘盈盘亏登记","盘盈盘亏审核","盘盈盘亏记录"]
+
+                /orderdetail.html=perms["订单详情列表"]
+                /orders.html=perms["采购列表","采购审核","采购入库","采购退货登记","采购确认","已完成采购","采购申请","销售列表","销售出库","销售退货登记","已完成销售","销售申请"]
+                /report_orders.html==perms["采购统计","销售统计","采购退货分析","销售退货分析"]
+                /report_trend.html==perms["采购趋势统计","销售趋势统计","采购退货趋势","销售退货趋势","仓库入库趋势","仓库出库趋势"]
+                /returnorders.html==perms["销售退货审核","销售退货入库","销售退货完成"]
+                /returnorders1.html==perms["采购退货审核","采购退货入库","采购退货完成"]
+                /supplier.html=perms["供应商","客户"]
+
+
+                /store.html=perms["仓库"]
+                /storeAlert.html=perms["库存预警"]
+                /storedetail.html=perms["仓库库存"]
+                /storeoper.html=perms["仓库操作记录"]
+
+                /role.html=perms["角色管理"]
+                /empRoleSet.html=perms["用户角色设置"]
+                /roleMenuSet.html=perms["角色权限设置"]
+
+                /dep_*=perms["部门"]
+                /emp_*=perms["员工"]
+                /goods_*=perms["商品"]
+                /goodstype_*=perms["商品类型"]
+                /inventory_*=perms["盘盈盘亏登记","盘盈盘亏审核","盘盈盘亏记录"]
+                /orders_*=perms["采购列表","采购审核","采购入库","采购退货登记","采购确认","已完成采购","采购申请","销售列表","销售出库","销售退货登记","已完成销售","销售申请"]
+                /report_*=perms["采购统计","销售统计","采购退货分析","销售退货分析","采购趋势统计","销售趋势统计","采购退货趋势","销售退货趋势","仓库入库趋势","仓库出库趋势"]
+                /returnorders_*=perms["销售退货审核","销售退货入库","销售退货完成","采购退货审核","采购退货入库","采购退货完成"]
+                /role_*=perms["角色管理"]
+                /store_*=perms["仓库"]
+                /storeAlert_*=perms["库存预警"]
+                /storedetail_*=perms["仓库库存"]
+                /storeoper_*=perms["仓库操作记录"]
+                /supplier_*=perms["供应商","客户"]
+
+                /pwd.html=perms["管理员重置密码"]
+                /user_resetPwd=perms["管理员重置密码"]
+
+                /*.html = authc
+                /* = authc
+            </value>
+        </property>
+    </bean>
+    <!--  安全控制器:shiro的核心 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="erpRealm"/>
+    </bean>
+    <!-- 自定义realm -->
+    <bean id="erpRealm" class="cn.qgg.erp.realm.ErpRealm">
+        <property name="empBiz" ref="empBiz"/>
+        <property name="menuBiz" ref="menuBiz"/>
+        <property name="jedis" ref="jedis"/>
+    </bean>
+    <!--自定义过滤器-->
+    <bean id="erpFilter" class="cn.qgg.erp.filter.ErpFilter"/>
+
+</beans>

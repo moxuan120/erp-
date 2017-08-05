@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+
+		">
+
+    <bean id="depAction" class="cn.qgg.erp.action.DepAction" scope="prototype">
+        <property name="depBiz" ref="depBiz"/>
+    </bean>
+    <bean id="empAction" class="cn.qgg.erp.action.EmpAction" scope="prototype">
+        <property name="empBiz" ref="empBiz"/>
+    </bean>
+    <bean id="goodsAction" class="cn.qgg.erp.action.GoodsAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
+    <bean id="goodsTypeAction" class="cn.qgg.erp.action.GoodsTypeAction" scope="prototype">
+        <property name="goodsTypeBiz" ref="goodsTypeBiz"/>
+    </bean>
+    <bean id="userAction" class="cn.qgg.erp.action.UserAction" scope="prototype">
+        <property name="empBiz" ref="empBiz"/>
+        <property name="jedis" ref="jedis"/>
+        <property name="mailUtil" ref="mailUtil"/>
+        <property name="to" value="xu.tongjun@163.com"/>
+    </bean>
+    <bean id="menuAction" class="cn.qgg.erp.action.MenuAction" scope="prototype">
+        <property name="menuBiz" ref="menuBiz"/>
+    </bean>
+    <bean id="ordersAction" class="cn.qgg.erp.action.OrdersAction" scope="prototype">
+        <property name="ordersBiz" ref="ordersBiz"/>
+        <property name="waybillWs" ref="waybillClient"/>
+    </bean>
+    <bean id="orderDetailAction" class="cn.qgg.erp.action.OrderDetailAction" scope="prototype">
+        <property name="orderDetailBiz" ref="orderDetailBiz"/>
+    </bean>
+    <bean id="supplierAction" class="cn.qgg.erp.action.SupplierAction" scope="prototype">
+        <property name="supplierBiz" ref="supplierBiz"/>
+    </bean>
+    <bean id="inventoryAction" class="cn.qgg.erp.action.InventoryAction" scope="prototype">
+        <property name="inventoryBiz" ref="inventoryBiz"/>
+        <property name="storedetailBiz" ref="storedetailBiz"/>
+    </bean>
+    <bean id="returnorderdetailAction" class="cn.qgg.erp.action.ReturnorderdetailAction" scope="prototype">
+        <property name="returnorderdetailBiz" ref="returnorderdetailBiz"/>
+    </bean>
+    <bean id="returnordersAction" class="cn.qgg.erp.action.ReturnordersAction" scope="prototype">
+        <property name="returnordersBiz" ref="returnordersBiz"/>
+        <property name="ordersBiz" ref="ordersBiz"/>
+        <property name="orderDetailBiz" ref="orderDetailBiz"/>
+    </bean>
+    <bean id="roleAction" class="cn.qgg.erp.action.RoleAction" scope="prototype">
+        <property name="roleBiz" ref="roleBiz"/>
+    </bean>
+    <bean id="storedetailAction" class="cn.qgg.erp.action.StoredetailAction" scope="prototype">
+        <property name="storedetailBiz" ref="storedetailBiz"/>
+    </bean>
+    <bean id="storeoperAction" class="cn.qgg.erp.action.StoreoperAction" scope="prototype">
+        <property name="storeoperBiz" ref="storeoperBiz"/>
+    </bean>
+    <bean id="storeAction" class="cn.qgg.erp.action.StoreAction" scope="prototype">
+        <property name="storeBiz" ref="storeBiz"/>
+    </bean>
+    <bean id="reportAction" class="cn.qgg.erp.action.ReportAction" scope="prototype">
+        <property name="reportBiz" ref="reportBiz"/>
+    </bean>
+    <bean id="storeAlertAction" class="cn.qgg.erp.action.StoreAlertAction" scope="prototype">
+        <property name="storeAlertBiz" ref="storeAlertBiz"/>
+    </bean>
+
+</beans>
+	

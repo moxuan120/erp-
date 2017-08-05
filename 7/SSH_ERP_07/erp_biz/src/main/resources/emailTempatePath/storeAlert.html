@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<#list dates as date>
+    <h1>${date}库存预警</h1>
+</#list>
+<hr>
+<table cellpadding="5" border="1px">
+    <thead>
+    <th>商品编号</th>
+    <th>商品名称</th>
+    <th>库存数量</th>
+    <th>待发货数量</th>
+    </thead>
+    <tbody>
+    <#list storeAlertList as storeAlert>
+        <tr>
+            <td>${storeAlert.uuid}</td>
+            <td>${storeAlert.name}</td>
+            <td>${storeAlert.storenum}</td>
+            <td>${storeAlert.outnum}</td>
+        </tr>
+    </#list>
+    </tbody>
+
+</table>
+</body>
+</html>

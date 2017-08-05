@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>仓库操作记录管理</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript">
+        var name = "storeoper";
+        var columns = [[
+            {field: 'uuid', title: '编号', width: 100},
+            {field: 'empName', title: '操作员工', width: 100},
+            {field: 'opertime', title: '操作时间', width: 120},
+            {field: 'storeName', title: '仓库', width: 100},
+            {field: 'goodsName', title: '商品', width: 100},
+            {field: 'num', title: '数量', width: 100},
+            {
+                field: 'type', title: '操作类型', width: 100, formatter: function (value) {
+                if (value == 1) return '采购入库';
+                if (value == 2) return '销售出库';
+                if (value == 3) return '退货入库';
+                if (value == 4) return '退货出库';
+                if (value == 5) return '盘盈入库';
+                if (value == 6) return '盘亏出库';
+            }
+            }
+        ]];
+
+    </script>
+</head>
+<body>
+<table id="grid"></table>
+<div id="tb" style="padding:5px;height:auto">
+    <form id="searchForm">
+        操作员：<input class="easyui-combobox" name="t1.empuuid" style="width:80px;" data-options="url:'emp_simpleList',valueField:'uuid',textField:'name'">
+        仓库：<input class="easyui-combobox" name="t1.storeuuid" style="width:80px;" data-options="url:'store_simpleList',valueField:'uuid',textField:'name'">
+        商品：<input class="easyui-combobox" name="t1.goodsuuid" style="width:80px;" data-options="url:'goods_simpleList',valueField:'uuid',textField:'name'">
+        类型<select class="easyui-combobox" name="t1.type" style="width:80px;">
+        <option value="">未定义</option>
+        <option value="1">采购入库</option>
+        <option value="2">销售出库</option>
+        <option value="3">退货入库</option>
+        <option value="4">退货出库</option>
+        <option value="5">盘盈入库</option>
+        <option value="6">盘亏出库</option>
+        </select>
+        时间：<input class="easyui-datetimebox" name="t1.opertime" style="width:142px;" data-options="editable:false,showSeconds:false">
+        --<input class="easyui-datetimebox" name="t2.opertime" style="width:142px;" data-options="editable:false,showSeconds:false">
+        数量：<input class="easyui-textbox" name="t1.num" style="width:80px;">
+        --<input class="easyui-textbox" name="t2.num" style="width:80px;">
+
+        <a href="javascript:void(0)" onclick="clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel">清空</a>
+        <a href="javascript:void(0)" onclick="refresh()" class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

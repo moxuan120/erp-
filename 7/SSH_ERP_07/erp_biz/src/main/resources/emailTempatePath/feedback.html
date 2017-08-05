@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<#list subjects as subject>
+    <h1>用户反馈:${subject}</h1>
+</#list>
+<#list users as user>
+    <h3>来自用户:${user}</h3>
+</#list>
+<hr>
+<table cellpadding="5" border="1px">
+    <thead>
+    <#list texts as text>
+        <h3>${text}</h3>
+    </#list>
+    </tbody>
+
+</table>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<#list dates as date>
+    <h1>${date}报表</h1>
+</#list>
+
+<hr>
+<h2>统计报表</h2>
+<table cellpadding="5" border="1px">
+    <thead>
+    <th>操作类型</th>
+    <th>商品总价</th>
+    </thead>
+    <tbody>
+    <#list soReportList as soReport>
+        <tr>
+            <td>${soReport.type}</td>
+            <td>${soReport.totalMoney}</td>
+        </tr>
+    </#list>
+    </tbody>
+
+</table>
+<hr>
+<h2>详情单</h2>
+<table cellpadding="5" border="1px">
+    <thead>
+    <th>操作时间</th>
+    <th>操作员工</th>
+    <th>商品名称</th>
+    <th>操作类型</th>
+    <th>仓库</th>
+    <th>商品数量</th>
+    <th>商品单价</th>
+    <th>商品总价</th>
+    </thead>
+    <tbody>
+    <#list storeoperList as storeoper>
+        <tr>
+            <td>${storeoper.opertime}</td>
+            <td>${storeoper.empName}</td>
+            <td>${storeoper.goodsName}</td>
+            <td>${storeoper.type}</td>
+            <td>${storeoper.storeName}</td>
+            <td>${storeoper.num}</td>
+            <td>${storeoper.price}</td>
+            <td>${storeoper.totalMoney}</td>
+        </tr>
+    </#list>
+    </tbody>
+
+</table>
+</body>
+</html>

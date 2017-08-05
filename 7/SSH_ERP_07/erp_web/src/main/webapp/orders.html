@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+    <link rel="stylesheet"href="ui/themes/default/easyui.css">
+    <link rel="stylesheet"href="ui/themes/icon.css">
+    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="css/table.css">
+    <script src="ui/jquery.min.js"></script>
+    <script src="ui/jquery.easyui.min.js"></script>
+    <script src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="ui/jquery.serializejson.min.js"></script>
+    <script src="js/request.js"></script>
+    <script src="js/download.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/orders_add.js"></script>
+    <script src="js/orders_return.js"></script>
+
+</head>
+<body>
+<table id="grid"></table>
+<div id="ordersDlg" class="easyui-dialog" style="padding:2px;"
+     data-options="title:'订单详情',modal:true,closed:true,width:700,height:320,closable:false
+	">
+    <table class="hovertable" id="orderdetailTable">
+        <tr>
+            <td class="bg" width="10%">流水号</td>
+            <td id="uuid" width="15%"></td>
+            <td class="bg" width="10%">供应商</td>
+            <td id="suppliername" width="15%"></td>
+            <td class="bg" width="10%">状态</td>
+            <td id="state" width="15%"></td>
+            <td class="bg" width="10%">运单号</td>
+            <td colspan="7" width="15%" id="sn"></td>
+        </tr>
+    </table>
+    <!-- 明细的表格 -->
+    <table id="itemgrid"></table>
+</div>
+
+<!--订单详情-->
+<div id="itemDlg" class="easyui-dialog" style="padding:4px;" data-options="closed:true" >
+    <form id="itemForm">
+        <input id="itemid" name="id" type="hidden"/>
+        <table class="hovertable">
+            <tr>
+                <td class="bg">商品编号</td>
+                <td id="goodsuuid"></td>
+            </tr>
+            <tr>
+                <td class="bg">商品名称</td>
+                <td id="goodsname"></td>
+            </tr>
+            <tr>
+                <td class="bg">数量</td>
+                <td id="num"></td>
+            </tr>
+            <tr>
+                <td class="bg">仓库</td>
+                <td><input name="storeuuid" class="easyui-combobox"
+                           data-options="url:'store_myList',valueField:'uuid',textField:'name'"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!--增加订单-->
+<div id="editOrders" class="easyui-dialog" style="width:800px;height:400px;padding: 20px"
+     data-options="title:'编辑',closed:true,cache:false,modal:true">
+    <form id="orderForm">
+        <span id="comboName"></span>：<input name="t1.supplieruuid" class="easyui-combogrid" id="supplier" style="width: 80px"/>    </form>
+    <table id="ordersGrid" class="easyui-datagrid" style="width:700px;height:auto"
+               data-options="
+				iconCls: 'icon-edit',
+				singleSelect: true,
+				toolbar: '#tb1',
+				method: 'get',
+				onClickRow: onClickRow,
+				singleSelect: true,
+                showFooter: true,
+                columns:columns
+			">
+        </table>
+    <div id="tb1" style="height:auto">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
+           onclick="append()">添加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
+           onclick="removeit()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+           onclick="accept()">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
+           onclick="reject()">撤销</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+           onclick="submitOrders()">提交申请</a>
+    </div>
+</div>
+
+<!--物流详情-->
+<div id="waybillDlg" class="easyui-dialog" style="padding: 2px" data-options="title:'运单详情',width:500,height:300,modal:true,closed:true">
+    <table id="waybillGrid"></table>
+</div>
+
+<!-- 退货窗口 -->
+<div id="addReturnOrdersDlg" class="easyui-dialog" style="padding: 2px" data-options="title:'退货申请',width:250,height:180,modal:true,closed:true">
+	<form id="returnorderForm" type="post">
+		<input id="returnId" name="id" type="hidden"/>
+		<table cellpadding="5" align="center">
+		 	<tr>
+	            <td class="bg">商品名称</td>
+	            <td id="returnName"></td>
+	        </tr>
+		 	<tr>
+	            <td class="bg">订单数量</td>
+	            <td id="ordersNum"></td>
+	        </tr>
+		 	<tr>
+	            <td class="bg">退货数量</td>
+	            <td><input id="returnNum" name="num" class="easyui-textbox" style="width: 120px"/></td>
+	        </tr>
+        </table>
+	</form>
+</div>
+</body>
+</html>

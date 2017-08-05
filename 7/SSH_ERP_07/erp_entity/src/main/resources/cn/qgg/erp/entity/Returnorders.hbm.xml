@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.qgg.erp.entity.Returnorders" table="RETURNORDERS" >
+        <id name="uuid" column="UUID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <param name="sequence_name">RETURNORDERS_SEQ</param>
+            </generator>
+        </id>
+        <property name="createtime" column="CREATETIME"/>
+        <property name="checktime" column="CHECKTIME"/>
+        <property name="endtime" column="ENDTIME"/>
+        <property name="type" column="TYPE"/>
+        <property name="creater" column="CREATER"/>
+        <property name="checker" column="CHECKER"/>
+        <property name="ender" column="ENDER"/>
+        <property name="supplieruuid" column="SUPPLIERUUID"/>
+        <property name="totalmoney" column="TOTALMONEY"/>
+        <property name="state" column="STATE"/>
+        <property name="waybillsn" column="WAYBILLSN"/>
+        <!-- <property name="ordersuuid" column="ORDERSUUID"/> -->
+        <many-to-one name="orders" class="cn.qgg.erp.entity.Orders" column="ORDERSUUID"/>
+        
+        <bag name="returnorderdetails" order-by="UUID" cascade="save-update">
+            <key column="ORDERSUUID"/>
+            <one-to-many class="cn.qgg.erp.entity.Returnorderdetail" />
+        </bag>
+    </class>
+</hibernate-mapping>

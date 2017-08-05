@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理员重置密码</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="js/pwd.js"></script>
+</head>
+<body>
+<table id="grid"></table>
+<div id="tb" style="padding:5px;height:auto">
+    <form id="searchForm">
+        登录名：<input class="easyui-textbox" name="t1.username" style="width:80px">
+        姓名：<input class="easyui-textbox" name="t1.name" style="width:80px">
+        性别：<select class="easyui-combobox" name="t1.gender" style="width:80px">
+        <option value="">未定义</option>
+        <option value="0">女</option>
+        <option value="1">男</option>
+    </select>
+        邮箱：<input class="easyui-textbox" name="t1.email" style="width:80px">
+        电话：<input class="easyui-textbox" name="t1.tele" style="width:120px"><br>
+        生日：<input class="easyui-datebox" name="t1.birthday" style="width:142px;" data-options="editable:false,showSeconds:false">--
+        <input class="easyui-datebox" name="t2.birthday" style="width:142px;" data-options="editable:false,showSeconds:false">
+        地址：<input class="easyui-textbox" name="t1.address" style="width:150px">
+        部门：<select id="select1" class="easyui-combobox" name="t1.dep.uuid" style="width: 120px"
+                   data-options="editable:true,valueField:'uuid',textField:'name',multiple:false">
+    </select>
+        <a href="javascript:void(0)" onclick="clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel">清空</a>
+        <a href="javascript:void(0)" onclick="refresh()" class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+
+    </form>
+</div>
+
+<div id="resetPwd" class="easyui-dialog" style="width:320px;height:160px;padding: 20px"
+     data-options="title:'重置密码',closed:true,cache:false,modal:true,buttons:'#btn'">
+    <form id="resetForm" method="post">
+        <input type="hidden" name="t1.uuid" id="uuid">
+        <table cellpadding="5" align="center">
+            <tr>
+                <td>新密码:</td>
+                <td><input class="easyui-textbox" name="resetPwd" type="password"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="btn">
+    <a href="javascript:void(0)" onclick="submitReset()" class="easyui-linkbutton" data-options="iconCls: 'icon-save'">保存</a>
+    <a href="javascript:void(0)" onclick="closeResetPwd()" class="easyui-linkbutton"
+       data-options="iconCls: 'icon-cancel'">关闭</a>
+</div>
+</body>
+</html>

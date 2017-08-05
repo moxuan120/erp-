@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>退货订单管理</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script src="js/request.js"></script>
+    <script type="text/javascript" src="js/returnOrders1.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+	
+<!-- 1.订单列表窗口 -->
+<table id="grid"></table>
+
+<!-- 2.订单详情窗口 -->
+	<div id="ordersDlg" class="easyui-dialog" style="padding: 2px;"
+		title="订单详情窗口"
+		data-options="modal:true,closed:true,width:700,height:320">
+		<!-- 2-1.订单信息 -->
+		<table class="hovertable">
+		<tr>
+            <td class="bg" width="10%">流水号</td>
+            <td id="uuid" width="15%"></td>
+            <td class="bg" width="10%">供应商</td>
+            <td id="suppliername" width="15%"></td>
+            <td class="bg" width="10%">状态</td>
+            <td id="state" width="15%"></td>
+            <td class="bg" width="10%">运单号</td>
+            <td colspan="7" width="15%" id="sn"></td>
+        </tr>
+		<tr>
+            <td class='bg' >下单人</td>
+            <td id='createrName'></td>
+            <td class='bg' >审核人</td>
+            <td id='checkerName'></td>
+            <td class='bg' >确认人</td>
+            <td id='starterName'></td>
+            <td class='bg' >库管员</td>
+            <td id='enderName'></td>
+            </tr><tr>
+            <td class='bg noBorderBottom'>下单时间</td>
+            <td class='noBorderBottom' id='createtime'></td>
+            <td class='bg noBorderBottom'>审核时间</td>
+            <td class='noBorderBottom' id='checktime'></td>
+            <td class='bg noBorderBottom'>确认时间</td>
+            <td class='noBorderBottom' id='starttime'></td>
+            <td class='bg noBorderBottom'>入库时间</td>
+            <td class='noBorderBottom' id='endtime'></td>
+            </tr>
+		</table>
+		<!-- 2-2.订单详情信息 -->
+		<table id="itemgrid"></table>
+	</div>
+<!-- 4.新增退货订单的窗口,在我的订单那一页才显示 -->
+	<div id="addOrdersDlg" style="padding: 2px;" title="订单详情窗口" data-options="modal:true,closed:true">
+	<form id="oldOrdersForm">
+		订单编号：<input id="oldOrdersCombogrid" name="uuid" />  
+		<input type="hidden" id="ordersuuid" />
+	</form>
+	</div>
+<!-- 3.进出库窗口 -->
+	<div id="itemDlg" title="退货进出库窗口" style="padding: 4px;"
+		data-options="modal:true,closed:true,width:700,height:320">
+		<form id="itemForm">
+			<table class="hovertable">
+				<tr>
+					<td class="bg" width="30%">商品编号<input type="hidden" id="id"
+						name="id" /></td>
+					<td id="goodsuuid" width="70%"></td>
+				</tr>
+				<tr>
+					<td class="bg">商品名称</td>
+					<td id="goodsname"></td>
+				</tr>
+				<tr>
+					<td class="bg">数量</td>
+					<td id="num"></td>
+				</tr>
+				<tr>
+					<td class="bg">仓库</td>
+					<td><input name="storeuuid" class="easyui-combobox"
+						data-options="
+						url:'store_myList',
+						valueField:'uuid',
+						textField:'name'
+					" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

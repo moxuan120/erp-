@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.qgg.erp.entity.Menu" table="MENU" >
+        <id name="menuid" column="MENUID"/>
+        <property name="menuname" column="MENUNAME"/>
+        <property name="icon" column="ICON"/>
+        <property name="url" column="URL"/>
+        <bag name="menus" order-by="MENUID" lazy="false">
+            <key column="PID"/>
+            <one-to-many class="cn.qgg.erp.entity.Menu"/>
+        </bag>
+    </class>
+</hibernate-mapping>

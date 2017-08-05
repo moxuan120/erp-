@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.qgg.erp.entity.Storedetail" table="STOREDETAIL" >
+        <id name="uuid" column="UUID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <param name="sequence_name">STOREDETAIL_SEQ</param>
+            </generator>
+        </id>
+        <property name="storeuuid" column="STOREUUID"/>
+        <property name="goodsuuid" column="GOODSUUID"/>
+        <property name="num" column="NUM"/>
+    </class>
+</hibernate-mapping>

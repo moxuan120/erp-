@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>综合信息管理系统</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#loginForm").form({
+                url: 'user_login',
+                success: function (data) {
+                    var data = eval('(' + data + ')'); //json转化成js对象
+                    $.messager.alert('提示', data.message, 'info', function () {
+                        if (data.success) {
+                            location.href = 'index.html'
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div class='signup_container'>
+    <div class="w-load">
+        <div class="spin"></div>
+    </div>
+    <h1 class='signup_title'>综合信息管理系统</h1>
+    <form class="signup_form_form" id="loginForm" method="post">
+        <div id="userInfo">
+	        <span style="margin-left:40px; height:200px; border:0px solid red">
+	        	<object type="application/x-shockwave-flash" style="outline:none;" 
+	        	data="http://cdn.abowman.com/widgets/penguins/penguins.swf?" width="300" height="200">
+	        	<param name="movie" value="http://cdn.abowman.com/widgets/penguins/penguins.swf?"></param>
+	        	<param name="AllowScriptAccess" value="always">
+	        	</param><param name="wmode" value="opaque">
+	        	</param><param name="scale" value="noscale"/><param name="salign" value="tl"/>
+	        	</object>
+	        	<!-- <img src='images/erp.jpg' id='admin'/> -->
+	        </span>
+            <span style=" margin-left:40px; height:100px; border:0px solid red">
+	            <div id="signup_forms" class="signup_forms clearfix">
+	                <div class="form_row first_row">
+	                    <label for="signup_name">请输入用户名</label>
+	                    <input type="text" name="username" placeholder="请输入用户名" id="signup_name" value="admin">
+	                </div>
+	                <div class="form_row">
+	                    <label for="signup_password">请输入密码</label>
+	                    <input type="password" name="password" placeholder="请输入密码" id="signup_password" value="admin">
+	                </div>
+	            </div>
+	            <div id="foo"></div><br/>
+       		</span>
+        </div>
+
+        <div class="login-btn-set" >
+            <table cellpadding="5" align="center">
+                <tr>
+                    <td colspan="1"><input class="login-btn" type="submit" value=""/></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+</html>

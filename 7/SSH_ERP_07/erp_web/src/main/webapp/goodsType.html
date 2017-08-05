@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>商品分类</title>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript">
+        var name = 'goodsType';
+        var columns = [[
+            {field: 'uuid', title: 'uuid', width: 60, align: 'center', halign: 'center'},
+            {field: 'name', title: '名称', width: 120, halign: 'center'},
+            {
+                field: '-',
+                title: '操作',
+                width: 120,
+                halign: 'center',
+                align: 'center',
+                formatter: function (value, row, index) {
+                	 var oper = '<a href="javascript:void(0);" class="easyui-linkbutton" onclick="edit(' + row.uuid + ')"> <img src="images/edit.png"></a>';
+                     oper += ' &nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton" onclick="del(' + row.uuid + ')"><img src="images/delete.png"></a>';
+                     return oper;
+                }
+            }
+
+        ]]
+    </script>
+</head>
+<body>
+<table id="grid"></table>
+<div id="tb" style="padding:5px;height:auto">
+    <form id="searchForm">
+        名称：<input class="easyui-textbox" name="t1.name" style="width:80px">
+        <a href="javascript:void(0)" onclick="clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel">清空</a>
+        <a href="javascript:void(0)" onclick="refresh()" class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+
+    </form>
+</div>
+<div id="editWindow">
+    <form id="editForm" method="post">
+        <input type="hidden" name="t1.uuid">
+        <table cellpadding="5" align="center">
+            <tr>
+                <td>商品类型名称</td>
+                <td><input class="easyui-textbox" name="t1.name" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

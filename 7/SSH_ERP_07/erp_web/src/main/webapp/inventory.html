@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>盘盈盘亏管理</title>
+<link rel="stylesheet" type="text/css"
+	href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script src="js/request.js"></script>
+<script type="text/javascript" src="js/inventory.js"></script>
+</head>
+<body>
+	<table id="grid"></table>
+	<div id="tb" style="padding: 5px; height: auto">
+		<form id="searchForm">
+			商品：<input class="easyui-textbox" name="t1.goodsuuid"> 仓库：<input
+				class="easyui-textbox" name="t1.storeuuid"> 数量：<input
+				class="easyui-textbox" name="t1.num"> --<input
+				class="easyui-textbox" name="t2.num"> 类型：<input
+				class="easyui-textbox" name="t1.type"> 登记时间：<input
+				class="easyui-datetimebox" name="t1.createtime"
+				style="width: 142px;"
+				data-options="editable:false,showSeconds:false"> --<input
+				class="easyui-datetimebox" name="t2.createtime"
+				style="width: 142px;"
+				data-options="editable:false,showSeconds:false"> 审核时间：<input
+				class="easyui-datetimebox" name="t1.checktime" style="width: 142px;"
+				data-options="editable:false,showSeconds:false"> --<input
+				class="easyui-datetimebox" name="t2.checktime" style="width: 142px;"
+				data-options="editable:false,showSeconds:false"> 登记人：<input
+				class="easyui-textbox" name="t1.creater"> 审核人：<input
+				class="easyui-textbox" name="t1.checker"> 状态：<input
+				class="easyui-textbox" name="t1.state"> 备注：<input
+				class="easyui-textbox" name="t1.remark"> <a
+				href="javascript:void(0)" onclick="clearSearchForm()"
+				class="easyui-linkbutton" iconCls="icon-cancel">清空</a> <a
+				href="javascript:void(0)" onclick="refresh()"
+				class="easyui-linkbutton" iconCls="icon-search">筛选</a>
+		</form>
+	</div>
+
+	<div id="addWindow">
+		<form id="addForm" method="post">
+			<input name="t1.uuid" type="hidden">
+			<table cellpadding="5" align="center">
+				<tr>
+					<td>仓库</td>
+					<td><input class="easyui-combobox" name="t1.storeuuid"
+						data-options="url:'store_simpleList',valueField:'uuid',textField:'name'"></td>
+				</tr>
+				<tr>
+					<td>商品</td>
+					<td><input class="easyui-combobox" name="t1.goodsuuid"
+						data-options="url:'goods_simpleList',valueField:'uuid',textField:'name'"></td>
+				</tr>
+				<tr>
+					<td>库存盘点数量</td>
+					<td><input class="easyui-textbox" name="t1.num"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="checkWindow">
+		<form id="checkForm" method="post">
+			<input id="uuid" name="t1.uuid" type="hidden">
+			<table cellpadding="5" align="center">
+				<tr>
+					<td>仓库</td>
+					<td id="storeuuid"></td>
+				</tr>
+				<tr>
+					<td>商品</td>
+					<td id=goodsuuid></td>
+				</tr>
+				<tr>
+					<td>数量</td>
+					<td id="num"></td>
+				</tr>
+				<tr>
+					<td>类型</td>
+					<td id="type"></td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td><textarea name="t1.remark" rows="4" cols="20"></textarea></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

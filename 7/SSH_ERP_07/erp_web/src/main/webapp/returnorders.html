@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>销售退货订单管理</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="css/table.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="ui/request.js"></script>
+<script type="text/javascript" src="js/returnorders.js"></script>
+<script type="text/javascript" src="js/returnorders_add.js"></script>
+</head>
+<body>
+<!-- 订单表格 -->
+<table id="grid"></table>
+
+<!-- 订单明细弹窗 -->
+<div id="returnordersDlg" style="padding:2px;">
+	<table class="hovertable">
+		<tr>
+            <td class="bg" width="10%">流水号</td>
+            <td id="uuid" width="15%"></td>
+            <td class="bg" width="10%">供应商</td>
+            <td id="suppliername" width="15%"></td>
+            <td class="bg" width="10%">状态</td>
+            <td id="state" width="15%"></td>
+            <td class="bg" width="10%">运单号</td>
+            <td colspan="7" width="15%" id="sn"></td>
+        </tr>
+		<tr>
+            <td class='bg noBorderBottom'>下单人</td>
+            <td class='noBorderBottom' id='createrName'></td>
+            <td class='bg noBorderBottom'>下单时间</td>
+            <td class='noBorderBottom' id='createtime'></td>
+            <td class='noBorderBottom' >库管员</td>
+            <td class='noBorderBottom' id='enderName'></td>
+            <td class='bg noBorderBottom'>出库时间</td>
+            <td class='noBorderBottom' id='endtime'></td>
+            </tr>
+	</table>
+	
+	<!-- 订单明细表格 -->
+	<table id="itemgrid"></table>
+</div>
+
+<!-- 供应商和顾客下拉列表 -->
+<div id="addReturnOrdersDlg" style="padding: 2px;">
+<form id="returnorderForm">
+<span id="returnordersupplier">客户</span>：<input name="t1.supplieruuid" id="supplier">
+</form>
+<div style="height:2px;"></div>
+<table id="returnordersgrid"></table>
+</div>
+
+
+<!--出入库弹窗  -->
+<div id="itemDlg" style="padding:4px;">
+	<form id="itemForm">
+		<table class="hovertable">
+			<tr>
+				<td class="bg" width="30%">商品编号<input type="hidden" id="id" name="id" /></td>
+				<td id="goodsuuid" width="70%"></td>
+			</tr>
+			<tr>
+				<td class="bg">商品名称</td>
+				<td id="goodsname"></td>
+			</tr>
+			<tr>
+				<td class="bg">数量</td>
+				<td id="num"></td>
+			</tr>
+			<tr>
+				<td class="bg">仓库</td>
+				<td><input name="storeuuid" class="easyui-combobox" data-options="
+					url:'store_myList',
+					valueField:'uuid',
+					textField:'name'
+				" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

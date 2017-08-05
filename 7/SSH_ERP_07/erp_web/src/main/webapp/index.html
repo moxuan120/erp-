@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>管理系统</title>
+    <link href="css/default.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="ui/themes/icon.css"/>
+    <script type="text/javascript" src="ui/jquery.min.js"></script>
+    <script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src='js/index.js'></script>
+    <script src="js/feedback.js"></script>
+</head>
+<body class="easyui-layout" style="overflow-y: hidden" fit="true" scroll="no">
+<noscript>
+    <div style=" position:absolute; z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
+        <img src="images/noscript.gif" alt='抱歉，请开启脚本支持！'/>
+    </div>
+</noscript>
+
+<div id="loading-mask"
+     style="position:absolute;top:0px; left:0px; width:100%; height:100%; background:#D2E0F2; z-index:20000">
+    <div id="pageloading"
+         style="position:absolute; top:50%; left:50%; margin:-120px 0px 0px -120px; text-align:center;  border:2px solid #8DB2E3; width:200px; height:40px;  font-size:14px;padding:10px; font-weight:bold; background:#fff; color:#15428B;">
+        <img src="images/loading.gif" align="absmiddle"/> 正在加载中,请稍候...
+    </div>
+</div>
+
+<div region="north" split="true" border="false" style="overflow: hidden; height: 60px;
+        background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+        line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
+    <span style="padding-left:-10px; font-size: 16px; "><img src="images/blocks.gif" width="350" height="55"align="absmiddle"/></span>
+
+    </span>
+     <span style="float:right; padding-right:20px; padding-top:6px;" class="head"><span style="font-weight:bold; font-size:13px" id="loginName"></span>
+        <br>
+        <a href="javascript:openPwd()" id="editpass">修改密码</a>
+        <a href="javascript:logout()" id="loginOut">安全退出</a>
+
+        <span class="head">
+
+     	</span>
+     </span>
+
+    <span style="float:right; padding-right:20px;" class="head">
+       <iframe allowtransparency="true" frameborder="0" width="565" height="64" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=2&t=1&v=2&d=3&bd=0&k=&f=&q=1&e=0&a=0&c=72038&w=565&h=64&align=center"></iframe>
+    </span>
+
+
+
+</div>
+<div region="south" split="true" style="height: 55px; background: #DDDDDD; ">
+    <div class="footer">
+
+   		<div style="float:right; padding-right:20px;padding-top:-10px;padding-bottom:-10px">
+   			<a href="javascript:feedback()" >意见反馈</a>||
+   			<a href="javascript:donate()" >捐助我们</a>||
+   			<a href="javascript:showGod()" >关于我们</a>
+   		</div>
+   		<div style="float:left; padding-left:5px;">
+   		Powered by QGG! X1.2 Licensed</div><br>
+   		<div id="myDate" style="float:right; padding-right:20px;padding-top:-10px;padding-bottom:-10px"></div>
+   		<div style="float:left; padding-left:5px;">
+		© 2017-2023 Team07 Com.
+		</div>
+    </div>
+</div>
+<div region="west" split="false" title="导航菜单" style="width:180px;" id="west">
+    <div id="nav">
+        <!--  导航内容 -->
+
+    </div>
+
+</div>
+<div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
+    <div id="tabs" class="easyui-tabs" fit="true" border="false">
+        <div title="欢迎使用" style="padding:20px;overflow:hidden; color:red; ">
+            <h1 style="font-size:24px;"></h1>
+            <h1 style="font-size:24px;"></h1>
+            <h1 style="font-size:24px;"></h1>
+            <h1 style="font-size:24px;"></h1>
+            <div style="text-align:center;">
+            	<font style="font-size: 27px;color: gray">欢迎使用强神ERP管理系统</font><br/><br/>
+            	<embed type="application/x-shockwave-flash" src="http://cdn.abowman.com/widgets/hamster/hamster.swf" width="520" height="420" id="flashID" name="flashID" bgcolor="#FFFFFF" quality="high" flashvars="up_backgroundColor=FFFFFF" wmode="opaque" allowscriptaccess="always">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改密码窗口-->
+<div id="w" class="easyui-window" title="修改密码" collapsible="false" minimizable="false"
+     maximizable="false" icon="icon-save" style="width: 300px; height: 150px; padding: 5px;
+        background: #fafafa;">
+    <div class="easyui-layout" fit="true">
+        <form id="pwdForm" region="center" border="false"
+              style="padding: 10px; background: #fff; border: 1px solid #ccc;">
+            <table cellpadding=3>
+                <tr>
+                    <td>旧密码：</td>
+                    <td><input id="txtOldPass" name="oldPwd" type="password"/></td>
+                </tr>
+                <tr>
+                    <td>新密码：</td>
+                    <td><input id="txtNewPass" name="newPwd" type="password"/></td>
+                </tr>
+                <tr>
+                    <td>确认密码：</td>
+                    <td><input id="txtRePass" type="password"/></td>
+                </tr>
+            </table>
+        </form>
+        <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
+            <a class="easyui-linkbutton" icon="icon-save" href="javascript:alterPwd()">保存</a>
+            <a class="easyui-linkbutton" icon="icon-cancel" href="javascript:closePwd()">取消</a>
+        </div>
+    </div>
+</div>
+
+<div id="mm" class="easyui-menu" style="width:150px;">
+    <div id="tabupdate">刷新</div>
+    <div class="menu-sep"></div>
+    <div id="close">关闭</div>
+    <div id="closeall">全部关闭</div>
+    <div id="closeother">除此之外全部关闭</div>
+    <div class="menu-sep"></div>
+    <div id="closeright">当前页右侧全部关闭</div>
+    <div id="closeleft">当前页左侧全部关闭</div>
+    <div class="menu-sep"></div>
+    <div id="exit">退出</div>
+</div>
+
+<div id="feedback" class="easyui-dialog">
+    <form id="feedbackForm" method="post">
+        <table cellpadding="5" align="center">
+            <tr>
+                <td>
+                    反馈主题
+                </td>
+                <td>
+                    <input name="fbSubject" class="easyui-textbox"  style="width:300px"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    反馈详情
+                </td>
+                <td>
+                    <textarea name="fbText" rows="6" cols="51"></textarea>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+<!-- 捐赠窗口 -->
+<div id="donateDlg" class="easyui-dialog" style="padding: 2px;text-align:center"  data-options="title:'支付宝扫码捐赠',width:380,height:550,modal:true,closed:true">
+	<img src="images/pay.png" alt="捐助" width="100%" height="100%"/>
+</div>
+<!-- 信仰窗口 -->
+<div id="godDlg" class="easyui-dialog" style="padding: 2px;text-align:center"  data-options="title:'强神爱众人',width:300,height:650,modal:true,closed:true">
+    <br>
+	<img src="images/anguoqiang.png" alt="国强" width="238" height="196"/><br/>
+    <table cellpadding="5" align="center" style="font-size: large">
+        <tr><th style="font-size: large">包工头</th><th style="font-size: large">刘国强</th></tr>
+        <tr><td style="font-size: large">工程师</td><td style="font-size: large">陈彩凤</td></tr>
+        <tr><td style="font-size: large">搬砖工</td><td style="font-size: large">许桐军</td></tr>
+        <tr><td style="font-size: large">水泥工</td><td style="font-size: large">谢嘉澍</td></tr>
+        <tr><td style="font-size: large">钢筋工</td><td style="font-size: large">王建峰</td></tr>
+        <tr><td style="font-size: large">水电工</td><td style="font-size: large">刘元凯</td></tr>
+        <tr><td style="font-size: large">架子工</td><td style="font-size: large">黄鹏达</td></tr>
+        <tr><td style="font-size: large">信号工</td><td style="font-size: large">段风云</td></tr>
+        <tr><td style="font-size: large">泥瓦工</td><td style="font-size: large">高迪</td></tr>
+        <tr><td style="font-size: large">电焊工</td><td style="font-size: large">程壮</td></tr>
+    </table>
+
+</div>
+
+</body>
+</html>
